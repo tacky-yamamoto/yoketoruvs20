@@ -38,7 +38,7 @@
             this.highscorelabel = new System.Windows.Forms.Label();
             this.gameoverlabel = new System.Windows.Forms.Label();
             this.crearlabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.titlebutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titlelabel
@@ -63,6 +63,12 @@
             this.startbutton.TabIndex = 1;
             this.startbutton.Text = "スタート";
             this.startbutton.UseVisualStyleBackColor = false;
+            this.startbutton.Click += new System.EventHandler(this.startbutton_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // copyrightlabel
             // 
@@ -130,25 +136,25 @@
             this.crearlabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.crearlabel.Visible = false;
             // 
-            // button1
+            // titlebutton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.button1.Location = new System.Drawing.Point(340, 254);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(197, 101);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "タイトルへ\r\n戻る";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.titlebutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.titlebutton.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.titlebutton.Location = new System.Drawing.Point(340, 254);
+            this.titlebutton.Name = "titlebutton";
+            this.titlebutton.Size = new System.Drawing.Size(197, 101);
+            this.titlebutton.TabIndex = 12;
+            this.titlebutton.Text = "タイトルへ\r\n戻る";
+            this.titlebutton.UseVisualStyleBackColor = false;
+            this.titlebutton.Visible = false;
+            this.titlebutton.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 495);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.titlebutton);
             this.Controls.Add(this.crearlabel);
             this.Controls.Add(this.gameoverlabel);
             this.Controls.Add(this.highscorelabel);
@@ -176,7 +182,7 @@
         private System.Windows.Forms.Label highscorelabel;
         private System.Windows.Forms.Label gameoverlabel;
         private System.Windows.Forms.Label crearlabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button titlebutton;
     }
 }
 
