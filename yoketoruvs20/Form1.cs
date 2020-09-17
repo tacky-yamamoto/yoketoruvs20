@@ -51,7 +51,11 @@ namespace yoketoruvs20
         public Form1()
         {
             InitializeComponent();
-
+            for (int i = PrayerIndex; i < ChrMax; i++)
+            {
+                vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+                vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+            }
             for (int i = 0; i < ChrMax; i++)
             {
                 chrs[i] = new Label();
@@ -133,7 +137,6 @@ namespace yoketoruvs20
                     startbutton.Visible = false;
                     copyrightlabel.Visible = false;
                     highscorelabel.Visible = false;
-
 
                     /*for (int i = PrayerIndex; i < ChrMax; i++)
                     {
