@@ -109,6 +109,11 @@ namespace yoketoruvs20
             //mpがプレイヤーの中心になるように設定
             chrs[PrayerIndex].Left = mp.X - (chrs[PrayerIndex].Width / 2);
             chrs[PrayerIndex].Top = mp.Y - (chrs[PrayerIndex].Height / 2);
+            for (int i = EnemyIndex; i < ChrMax; i++)
+            {
+                chrs[i].Left += vx[i];
+                chrs[i].Top += vy[i];
+            }
         }
 
         void initProc()
