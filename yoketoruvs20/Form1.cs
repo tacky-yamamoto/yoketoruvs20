@@ -87,6 +87,20 @@ namespace yoketoruvs20
                     Nextstate = State.Clear;
                 }
             }
+
+            if(currentState==State.Game)
+            {
+                UpdateGame();
+            }
+        }
+
+        void UpdateGame()
+        {
+            Point mp = PointToClient(MousePosition);
+
+            //mpがプレイヤーの中心になるように設定
+            chrs[PrayerIndex].Left = mp.X - (chrs[PrayerIndex].Width / 2);
+            chrs[PrayerIndex].Top = mp.Y - (chrs[PrayerIndex].Height / 2);
         }
 
         void initProc()
@@ -104,6 +118,10 @@ namespace yoketoruvs20
                     gameoverlabel.Visible = false;
                     titlebutton.Visible = false;
                     crearlabel.Visible = false;
+                    /*for (int i = PrayerIndex; i < ChrMax; i++)
+                    {
+                        chrs[i].Visible = false;
+                    }*/
                     break;
 
                 case State.Game:
@@ -111,6 +129,17 @@ namespace yoketoruvs20
                     startbutton.Visible = false;
                     copyrightlabel.Visible = false;
                     highscorelabel.Visible = false;
+
+
+                    /*for (int i = PrayerIndex; i < ChrMax; i++)
+                    {
+                        chrs[i].Visible = true;
+                    }*/
+                    for (int i = EnemyIndex; i < ChrMax; i++)
+                    {
+                        chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
+                        chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
+                    }
                     break;
 
                 case State.Gameover:
