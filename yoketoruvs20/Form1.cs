@@ -41,6 +41,10 @@ namespace yoketoruvs20
         State currentState = State.None;
         State Nextstate = State.Title;
 
+        const int SpeedMax = 20;
+        int[] vx = new int[ChrMax];
+        int[] vy = new int[ChrMax];
+
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vkey);
         
