@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace yoketoruvs20
 {
     public partial class Form1 : Form
     {
+        const bool isDebug = true;
+
         enum State
         {
             None = -1,  //無効
@@ -23,6 +26,8 @@ namespace yoketoruvs20
         State currentState = State.None;
         State Nextstate = State.Title;
 
+        [DllImport("user32.dll")]
+        public static extern short GetAsyncKeyState(int vkey);
         
         public Form1()
         {
@@ -34,6 +39,19 @@ namespace yoketoruvs20
             if(Nextstate != State.None)
             {
                 initProc();
+            }
+
+            if (isDebug) 
+            {
+                if (GetAsyncKeyState((int)Keys.O) < 0)
+                {
+                    Nextstate = State.Gameover;
+                }
+
+                if (GetAsyncKeyState((int)Keys.C) < 0)
+                {
+                    Nextstate = State.Clear;
+                }
             }
         }
 
@@ -60,7 +78,28 @@ namespace yoketoruvs20
                     copyrightlabel.Visible = false;
                     highscorelabel.Visible = false;
                     break;
+
+                case State.Gameover:
+                    gameoverlabel.Visible = true;
+                    titlebutton.Visible = true;
+                    break;
+
+                case State.Clear:
+                    crearlabel.Visible = true;
+                    titlebutton.Visible = true;
+                    highscorelabel.Visible = true;
+                    break;
             }
+        }
+
+        private void startbutton_Click(object sender, EventArgs e)
+        {
+            Nextstate = State.Game;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Nextstate = State.Title;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -83,14 +122,5 @@ namespace yoketoruvs20
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void startbutton_Click(object sender, EventArgs e)
-        {
-            Nextstate = State.Game;
-        }
     }
 }
