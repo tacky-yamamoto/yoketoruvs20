@@ -15,6 +15,21 @@ namespace yoketoruvs20
     {
         const bool isDebug = true;
 
+        const int PrayerMax = 1;
+        const int EnemyMax = 10;
+        const int ItemMax = 10;
+        const int ChrMax = PrayerMax + EnemyMax + ItemMax;
+        Label[] chrs = new Label[ChrMax];
+        const int PrayerIndex = 0;
+        const int EnemyIndex = PrayerIndex + PrayerMax;
+        const int ItemIndex = EnemyIndex + EnemyMax;
+
+        const string PrayerText = "(´・ω・`)";
+        const string EnemyText = "◆";
+        const string ItemText = "◎";
+
+        static Random rand = new Random();
+
         enum State
         {
             None = -1,  //無効
