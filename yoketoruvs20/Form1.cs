@@ -113,6 +113,22 @@ namespace yoketoruvs20
             {
                 chrs[i].Left += vx[i];
                 chrs[i].Top += vy[i];
+                if (chrs[i].Left < 0)
+                {
+                    vx[i] = Math.Abs(vx[i]);
+                }
+                if (chrs[i].Right > ClientSize.Width)
+                {
+                    vx[i] = -Math.Abs(vx[i]);
+                }
+                if (chrs[i].Top < 0)
+                {
+                    vy[i] = Math.Abs(vy[i]);
+                }
+                if (chrs[i].Bottom > ClientSize.Height)
+                {
+                    vy[i] = -Math.Abs(vy[i]);
+                }
             }
         }
 
