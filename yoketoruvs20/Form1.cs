@@ -68,6 +68,7 @@ namespace yoketoruvs20
                     chrs[i].Text = ItemText;
                 }
                 Controls.Add(chrs[i]);
+                chrs[i].Font = Templabel.Font;
             }
         }
 
@@ -123,6 +124,13 @@ namespace yoketoruvs20
                 if (chrs[i].Bottom > ClientSize.Height)
                 {
                     vy[i] = -Math.Abs(vy[i]);
+                }
+            }
+            for (int i = EnemyIndex; i < EnemyMax; i++)
+            {
+                if (mp.X > chrs[i].Left && mp.X < chrs[i].Right && mp.Y > chrs[i].Top && mp.Y < chrs[i].Bottom)
+                {
+                    Nextstate = State.Gameover;
                 }
             }
         }

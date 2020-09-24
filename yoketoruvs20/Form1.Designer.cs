@@ -39,6 +39,7 @@
             this.gameoverlabel = new System.Windows.Forms.Label();
             this.crearlabel = new System.Windows.Forms.Label();
             this.titlebutton = new System.Windows.Forms.Button();
+            this.Templabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titlelabel
@@ -149,11 +150,23 @@
             this.titlebutton.Visible = false;
             this.titlebutton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Templabel
+            // 
+            this.Templabel.AutoSize = true;
+            this.Templabel.Font = new System.Drawing.Font("UD デジタル 教科書体 NP-R", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Templabel.Location = new System.Drawing.Point(39, 202);
+            this.Templabel.Name = "Templabel";
+            this.Templabel.Size = new System.Drawing.Size(42, 31);
+            this.Templabel.TabIndex = 13;
+            this.Templabel.Text = "★";
+            this.Templabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 495);
+            this.Controls.Add(this.Templabel);
             this.Controls.Add(this.titlebutton);
             this.Controls.Add(this.crearlabel);
             this.Controls.Add(this.gameoverlabel);
@@ -183,6 +196,7 @@
         private System.Windows.Forms.Label gameoverlabel;
         private System.Windows.Forms.Label crearlabel;
         private System.Windows.Forms.Button titlebutton;
+        private System.Windows.Forms.Label Templabel;
     }
 }
 
