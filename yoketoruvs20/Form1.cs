@@ -51,11 +51,6 @@ namespace yoketoruvs20
         public Form1()
         {
             InitializeComponent();
-            for (int i = PrayerIndex; i < ChrMax; i++)
-            {
-                vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
-                vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
-            }
             for (int i = 0; i < ChrMax; i++)
             {
                 chrs[i] = new Label();
@@ -147,10 +142,10 @@ namespace yoketoruvs20
                     gameoverlabel.Visible = false;
                     titlebutton.Visible = false;
                     crearlabel.Visible = false;
-                    /*for (int i = PrayerIndex; i < ChrMax; i++)
+                    for (int i = PrayerIndex; i < ChrMax; i++)
                     {
                         chrs[i].Visible = false;
-                    }*/
+                    }
                     break;
 
                 case State.Game:
@@ -159,10 +154,12 @@ namespace yoketoruvs20
                     copyrightlabel.Visible = false;
                     highscorelabel.Visible = false;
 
-                    /*for (int i = PrayerIndex; i < ChrMax; i++)
+                    for (int i = PrayerIndex; i < ChrMax; i++)
                     {
                         chrs[i].Visible = true;
-                    }*/
+                        vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+                        vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+                    }
                     for (int i = EnemyIndex; i < ChrMax; i++)
                     {
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
