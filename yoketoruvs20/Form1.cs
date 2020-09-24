@@ -24,7 +24,7 @@ namespace yoketoruvs20
         const int EnemyIndex = PrayerIndex + PrayerMax;
         const int ItemIndex = EnemyIndex + EnemyMax;
 
-        const string PrayerText = "(´・ω・`)";
+        const string PrayerText = "(∵)";
         const string EnemyText = "◆";
         const string ItemText = "◎";
 
@@ -41,9 +41,12 @@ namespace yoketoruvs20
         State currentState = State.None;
         State Nextstate = State.Title;
 
-        const int SpeedMax = 20;
+        const int SpeedMax = 10;
         int[] vx = new int[ChrMax];
         int[] vy = new int[ChrMax];
+        int itemCount;
+        int timeCount;
+        int highScore=0;
 
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vkey);
@@ -105,10 +108,14 @@ namespace yoketoruvs20
             //mpがプレイヤーの中心になるように設定
             chrs[PrayerIndex].Left = mp.X - (chrs[PrayerIndex].Width / 2);
             chrs[PrayerIndex].Top = mp.Y - (chrs[PrayerIndex].Height / 2);
+            //タイム増加
+            timeCount--;
             for (int i = EnemyIndex; i < ChrMax; i++)
             {
+                //キャラクターの移動
                 chrs[i].Left += vx[i];
                 chrs[i].Top += vy[i];
+                //跳ね返り処理
                 if (chrs[i].Left < 0)
                 {
                     vx[i] = Math.Abs(vx[i]);
@@ -125,13 +132,37 @@ namespace yoketoruvs20
                 {
                     vy[i] = -Math.Abs(vy[i]);
                 }
-            }
-            for (int i = EnemyIndex; i < EnemyMax; i++)
-            {
-                if (mp.X > chrs[i].Left && mp.X < chrs[i].Right && mp.Y > chrs[i].Top && mp.Y < chrs[i].Bottom)
+                //当たり判定
+                if (mp.X > chrs[i].Left &&
+                    mp.X < chrs[i].Right &&
+                    mp.Y > chrs[i].Top &&
+                    mp.Y < chrs[i].Bottom &&
+                    chrs[i].Visible==true)
                 {
-                    Nextstate = State.Gameover;
+                    //敵の場合
+                    if (chrs[i].Text == EnemyText)
+                    {
+                        if (timeCount < 290)
+                        Nextstate = State.Gameover;
+                    }
+                    //アイテムの場合
+                    else
+                    {
+                        chrs[i].Visible = false;
+                        vx[i] = 0;
+                        itemCount--;
+                    }
                 }
+            }
+            starlabel.Text = "" + ItemText + ":" + itemCount;
+            timelabel.Text = "TIME " + timeCount;
+            if (itemCount <= 0)
+            {
+                Nextstate = State.Clear;
+            }
+            if(timeCount<=0)
+            {
+                Nextstate = State.Gameover;
             }
         }
 
@@ -150,6 +181,7 @@ namespace yoketoruvs20
                     gameoverlabel.Visible = false;
                     titlebutton.Visible = false;
                     crearlabel.Visible = false;
+                    //キャラクターを非表示
                     for (int i = PrayerIndex; i < ChrMax; i++)
                     {
                         chrs[i].Visible = false;
@@ -162,14 +194,19 @@ namespace yoketoruvs20
                     copyrightlabel.Visible = false;
                     highscorelabel.Visible = false;
 
+                    itemCount = ItemMax;
+                    timeCount = 300;
                     for (int i = PrayerIndex; i < ChrMax; i++)
                     {
+                        //キャラクターを表示
                         chrs[i].Visible = true;
+                        //キャラクターの移動の乱数指定
                         vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                         vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                     }
                     for (int i = EnemyIndex; i < ChrMax; i++)
                     {
+                        //キャラクターの位置の乱数指定
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
                         chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
                     }
@@ -181,9 +218,14 @@ namespace yoketoruvs20
                     break;
 
                 case State.Clear:
+                    if(highScore<timeCount)
+                    {
+                        highScore = timeCount;
+                        highscorelabel.Text = "HighScore " + highScore;
+                        highscorelabel.Visible = true;
+                    }
                     crearlabel.Visible = true;
                     titlebutton.Visible = true;
-                    highscorelabel.Visible = true;
                     break;
             }
         }
